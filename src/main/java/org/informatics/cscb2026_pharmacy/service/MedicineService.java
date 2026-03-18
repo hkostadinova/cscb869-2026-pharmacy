@@ -1,6 +1,5 @@
 package org.informatics.cscb2026_pharmacy.service;
 
-import org.informatics.cscb2026_pharmacy.data.entity.Medicine;
 import org.informatics.cscb2026_pharmacy.dto.CreateMedicineDto;
 import org.informatics.cscb2026_pharmacy.dto.MedicineDto;
 
