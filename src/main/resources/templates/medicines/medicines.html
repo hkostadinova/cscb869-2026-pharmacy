@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Medicines:</h4>
+<div class="col-6">
+    <h3 th:unless="${medicines} and ${medicines.size()}">There are no medicines!</h3>
+    <table th:if="${medicines.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Expiration Date</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <tr th:each="medicine : ${medicines}">
+            <td th:text="${medicine.id}"></td>
+            <td th:text="${medicine.name}"></td>
+            <td th:text="${medicine.price}"></td>
+            <td th:text="${medicine.expirationDate}"></td>
+            <td><a class="btn btn-info" th:href="@{'/medicines/edit-medicine/'+${medicine.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/medicines/delete/'+${medicine.id}}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
