@@ -1,5 +1,6 @@
 package org.informatics.cscb2026_pharmacy.service.impl;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.informatics.cscb2026_pharmacy.config.ModelMapperConfig;
 import org.informatics.cscb2026_pharmacy.data.entity.Medicine;
@@ -33,13 +34,13 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public MedicineDto createMedicine(CreateMedicineDto createMedicineDto) {
+    public MedicineDto createMedicine(@Valid CreateMedicineDto createMedicineDto) {
         Medicine medicine = modelMapperConfig.modelMapper().map(createMedicineDto, Medicine.class);
         return modelMapperConfig.modelMapper().map(medicineRepository.save(medicine), MedicineDto.class);
     }
 
     @Override
-    public MedicineDto updateMedicine(MedicineDto medicineDto, long id) {
+    public MedicineDto updateMedicine(@Valid MedicineDto medicineDto, long id) {
         Medicine updatedMedicine = medicineRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Id not found!"));
         updatedMedicine.setName(medicineDto.getName());

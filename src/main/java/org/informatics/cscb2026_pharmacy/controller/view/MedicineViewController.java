@@ -1,15 +1,14 @@
 package org.informatics.cscb2026_pharmacy.controller.view;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.informatics.cscb2026_pharmacy.dto.CreateMedicineDto;
 import org.informatics.cscb2026_pharmacy.dto.MedicineDto;
 import org.informatics.cscb2026_pharmacy.service.MedicineService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +32,10 @@ public class MedicineViewController {
     }
 
     @PostMapping("/create")
-    public String createMedicine(CreateMedicineDto medicine) {
+    public String createMedicine(@Valid @ModelAttribute("medicine") CreateMedicineDto medicine, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/medicines/create-medicine";
+        }
         this.medicineService.createMedicine(medicine);
         return "redirect:/medicines";
     }
@@ -45,7 +47,10 @@ public class MedicineViewController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateMedicine(@PathVariable long id, MedicineDto medicine) {
+    public String updateMedicine(@PathVariable long id, @Valid @ModelAttribute("medicine") MedicineDto medicine, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/medicines/edit-medicine";
+        }
         this.medicineService.updateMedicine(medicine, id);
         return "redirect:/medicines";
     }

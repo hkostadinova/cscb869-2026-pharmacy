@@ -1,5 +1,6 @@
 package org.informatics.cscb2026_pharmacy.controller.api;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.informatics.cscb2026_pharmacy.dto.CreateMedicineDto;
 import org.informatics.cscb2026_pharmacy.dto.MedicineDto;
@@ -28,12 +29,12 @@ public class MedicineApiController {
     }
 
     @PostMapping
-    public MedicineDto createMedicine(@RequestBody CreateMedicineDto medicineDto) {
+    public MedicineDto createMedicine(@RequestBody @Valid CreateMedicineDto medicineDto) {
         return medicineService.createMedicine(medicineDto);
     }
 
     @PutMapping("/{id}")
-    public MedicineDto updateMedicine(@RequestBody MedicineDto medicineDto, @PathVariable long id) {
+    public MedicineDto updateMedicine(@RequestBody @Valid MedicineDto medicineDto, @PathVariable long id) {
         return medicineService.updateMedicine(medicineDto, id);
     }
 
