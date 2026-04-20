@@ -5,6 +5,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
 public class Medicine extends BaseEntity {
 
     @NotBlank
