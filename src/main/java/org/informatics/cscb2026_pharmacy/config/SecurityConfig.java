@@ -58,10 +58,12 @@ public class SecurityConfig {
                         (
                                 authz -> authz
                                         .requestMatchers(HttpMethod.GET,"/medicines").hasAnyAuthority("DOCTOR", "SELLER", "CUSTOMER")
+                                        .requestMatchers(HttpMethod.GET,"/api/medicines").hasAnyAuthority("DOCTOR", "SELLER", "CUSTOMER")
                                         .requestMatchers("/medicines/**").hasAnyAuthority("DOCTOR", "SELLER")
+                                        .requestMatchers("/api/medicines/**").hasAnyAuthority("DOCTOR", "SELLER")
                                         .anyRequest().authenticated()
                         )
-                .formLogin(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults())
         ;
         return http.build();
     }
